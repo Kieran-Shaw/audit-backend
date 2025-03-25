@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.responses import FileResponse
-from fastapi.staticfiles import StaticFiles
+from starlette.staticfiles import StaticFiles
 
 app = FastAPI()
 
@@ -8,11 +8,11 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 
-@app.get("/")
-async def root():
+@app.get("/", response_model=dict[str, str])
+async def root() -> dict[str, str]:
     return {"message": "Hello from FastAPI!"}
 
 
-@app.get("/favicon.ico")
+@app.get("/favicon.ico", include_in_schema=False)
 async def favicon():
     return FileResponse("app/static/favicon.ico")
