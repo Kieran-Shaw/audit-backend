@@ -13,6 +13,6 @@ async def root() -> dict[str, str]:
     return {"message": "Hello from FastAPI!"}
 
 
-@app.get("/favicon.ico", include_in_schema=False)
+@app.get("/favicon.jpg", include_in_schema=False)
 async def favicon():
-    return FileResponse("app/static/favicon.ico")
+    return FileResponse("app/static/favicon.jpg")
